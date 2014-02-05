@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Jan Vanvinkenroye
+# Version 0.3
+
+datum=`date +%Y%m%d`
+datumy=`date +%y%m%d`
+count=`curl -s http://shackspace.de | grep "m=$datum" | fmt -8 | grep -A 1 m=$datum| grep -v m=$datum | grep -c -i plenum`
+
+   if [ "$count" != "0" ]
+           then
+            echo "Content-type: text/html"
+            echo ""
+            echo "<html><head><title>Ist heute Plenum?"
+            echo "</title></head><body>"
+            echo "<h1><a href="http://shackspace.de/nextplenum/http300/current">jupp</a></h1>"
+            exit 0
+    fi
+            echo "Content-type: text/html"
+            echo ""
+            echo "<html><head><title>Ist heute Plenum?"
+            echo "</title></head><body>"
+            echo "<h1>nope</h1>"
+	    echo "Nächstes Plenum findest du <a href="http://shackspace.de/nextplenum/text/iso">hier</a>
